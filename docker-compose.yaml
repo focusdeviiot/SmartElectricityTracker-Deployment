@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+  db:
+    profiles:
+      - dev
+      - deploy
+    image: postgres:16.3-alpine3.19
+    container_name: db
+    environment:
+      POSTGRES_USER: kmutnb
+      POSTGRES_PASSWORD: kmutnb@Eng
+      POSTGRES_DB: smart_electricity_tracker
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    profiles:
+      - deploy
+    build: ./api
+    container_name: api
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: kmutnb
+      DB_PASSWORD: kmutnb@Eng
+      DB_NAME: smart_electricity_tracker
+      JWT_SECRET: kmutnb@Eng
+      POWER_METER_DEVICE: /dev/ttyUSB0
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0" # เชื่อมต่อ USB ของโฮสต์เข้ากับ container
+
+  web:
+    profiles:
+      - deploy
+    build: ./web
+    container_name: web
+    ports:
+      - "80:80"
+      - "433:433" 
+    depends_on:
+      - api
