@@ -16,7 +16,7 @@ services:
       - "5432:5432"
 
   api:
-    restart: always
+    # restart: always
     profiles:
       - deploy
     build: ./api
@@ -28,7 +28,7 @@ services:
       DB_PASSWORD: kmutnb@Eng
       DB_NAME: smart_electricity_tracker
       JWT_SECRET: kmutnb@Eng
-      ONFIG_FILE: /root/config.yaml
+      CONFIG_FILE: /root/config.yaml
       POWER_METER_DEVICE: /dev/ttyUSB0
     ports:
       - "8080:8080"

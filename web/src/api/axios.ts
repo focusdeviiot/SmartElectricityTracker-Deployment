@@ -2,7 +2,7 @@ import axios from 'axios';
 import { DecodeTokenAndSetLocalStorage } from '../helpers/DecodeJWT';
 
 const apiClient = axios.create({
-  baseURL: window.location.origin, //import.meta.env.VITE_BASE_URL,
+  baseURL: window.location.origin + '/api', //import.meta.env.VITE_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
