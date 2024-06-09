@@ -3,7 +3,7 @@ import { MdElectricBolt } from "react-icons/md";
 import useWebSocket from "../hooks/useWebSocket";
 
 const Home = () => {
-  const { message, isConnected } = useWebSocket("ws://localhost:8080/ws");
+  const { message, isConnected } = useWebSocket(`ws://${location.hostname}/ws`);
   const [data, setData] = useState<{ [key: string]: { voltage: number; current: number; active_power: number } } | null>(null);
 
   useEffect(() => {
