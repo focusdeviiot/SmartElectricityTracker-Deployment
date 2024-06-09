@@ -1,0 +1,7 @@
+.git/
+node_modules/
+config/development/
+*.log
+.vscode/
+pnpm-lock.yaml
+README.md
