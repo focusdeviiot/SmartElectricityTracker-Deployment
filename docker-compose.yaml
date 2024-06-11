@@ -1,9 +1,6 @@
 services:
   db:
     restart: always
-    profiles:
-      - dev
-      - deploy
     image: postgres:16.3-alpine3.19
     container_name: db
     environment:
@@ -16,10 +13,8 @@ services:
       - "5432:5432"
 
   api:
-    # restart: always
-    profiles:
-      - deploy
-    build: ./api
+    restart: always
+    image: smart_electricity_tracker_server:latest
     container_name: api
     environment:
       DB_HOST: db
@@ -39,9 +34,7 @@ services:
 
   web:
     restart: always
-    profiles:
-      - deploy
-    build: ./web
+    image: smart_electricity_tracker_webapp:latest
     container_name: web
     ports:
       - "80:80"
