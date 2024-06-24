@@ -13,8 +13,9 @@ services:
       - "5432:5432"
 
   api:
+    build: ./api
     restart: always
-    image: smart_electricity_tracker_server:latest
+    # image: smart_electricity_tracker_server:latest
     container_name: api
     environment:
       DB_HOST: db
@@ -34,8 +35,9 @@ services:
     privileged: true
 
   web:
+    build: ./web
     restart: always
-    image: smart_electricity_tracker_webapp:latest
+    # image: smart_electricity_tracker_webapp:latest
     container_name: web
     ports:
       - "80:80"
