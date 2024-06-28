@@ -14,7 +14,7 @@ services:
 
   api:
     restart: always
-    image: smart_electricity_tracker_server:latest
+    image: focusdeviiot/smart-electricity-tracker-server:latest
     container_name: api
     environment:
       DB_HOST: db
@@ -35,7 +35,7 @@ services:
 
   web:
     restart: always
-    image: smart_electricity_tracker_webapp:latest
+    image: focusdeviiot/smart-electricity-tracker-webapp:latest
     container_name: web
     ports:
       - "80:80"

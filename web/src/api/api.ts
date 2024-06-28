@@ -117,3 +117,12 @@ export const updateUserDevice = async (data): Promise<Response> => {
     }
 }
 
+export const syncTime = async (data): Promise<Response> => {
+    try {
+        const response = await apiClient.post<Response>('admin/sync-time', { ...data });
+        return response.data;
+    } catch (error: any) {
+        return Promise.reject(error);
+    }
+}
+

@@ -36,11 +36,29 @@ const ExportToExcel = ({ data, fileName, disabled = false }) => {
         return buf;
       };
 
-      // สร้าง Blob จาก ArrayBuffer และบันทึกไฟล์
-      saveAs(
-        new Blob([s2ab(wbout)], { type: "application/octet-stream" }),
-        `${fileName + " " + formatDate(new Date())}.xlsx`
-      );
+      const blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+
+      // ตรวจสอบว่าเบราว์เซอร์เป็น Safari บน iOS หรือไม่
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+
+      if (isIOS) {
+        // ใช้ data URL สำหรับ iOS
+        const reader = new FileReader();
+        reader.onload = function (e :any) {
+          const url = e.target.result;
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${fileName + " " + formatDate(new Date())}.xlsx`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        };
+        reader.readAsDataURL(blob);
+      } else {
+        // ใช้ file-saver สำหรับเบราว์เซอร์อื่น ๆ
+        saveAs(blob, `${fileName + " " + formatDate(new Date())}.xlsx`);
+      }
+
       resolve();
     });
   };
