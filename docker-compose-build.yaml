@@ -13,8 +13,8 @@ services:
       - "5432:5432"
 
   api:
+    build: ./api
     restart: always
-    image: focusdeviiot/smart-electricity-tracker-server:latest
     container_name: api
     environment:
       DB_HOST: db
@@ -34,8 +34,8 @@ services:
     privileged: true
 
   web:
+    build: ./web
     restart: always
-    image: focusdeviiot/smart-electricity-tracker-webapp:latest
     container_name: web
     ports:
       - "80:80"

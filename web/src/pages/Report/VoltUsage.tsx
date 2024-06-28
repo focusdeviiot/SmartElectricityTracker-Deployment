@@ -17,7 +17,7 @@ const VoltUsage = () => {
     getDeviceByUserID()
       .then((response) => {
         if (response.success === true) {
-          setListDevices(response.data.data_list);
+          setListDevices(response.data.data_list ?? []);
         }
       })
       .catch((error) => {
