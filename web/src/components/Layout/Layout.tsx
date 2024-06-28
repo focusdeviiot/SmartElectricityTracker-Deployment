@@ -57,9 +57,9 @@ const ProfileDropdown: React.FC = () => {
         </div>
         <ul className="mt-2 flex flex-col gap-2">
           <li>
-            {auth?.role === "ADMIN" && (
+            {/* {auth?.role === "ADMIN" && (
               <button className="btn btn-ghost btn-sm w-full" onClick={syncTimeHandler}>Sync Time</button>
-            )}
+            )} */}
             <Link
               className="flex justify-center items-center h-10 text-red-500"
               to="/logout"
